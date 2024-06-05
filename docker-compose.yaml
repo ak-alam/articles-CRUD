@@ -1,5 +1,31 @@
 version: '3.3'
 services:
+  frontend:
+    container_name: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+
+  article-api:
+    container_name: article_api
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile 
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - db_endpoint=127.0.0.1
+      - db_endpoint=db
+      - db_user=user
+      - db_password=password
+      - db_name=db
+
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     restart: always
