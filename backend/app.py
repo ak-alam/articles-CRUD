@@ -6,16 +6,16 @@ import datetime
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 
+db_endpoint = os.environ['db_endpoint']
+db_user = os.environ['db_user']
+db_password = os.environ['db_password']
+db_name = os.environ['db_name']
 
-# db_endpoint = os.getenv('db_endpoint')
-# db_user = os.getenv('db_user')
-# db_password = os.getenv('db_password')
-# db_name = os.getenv('db_name')
-
-db_endpoint = "127.0.0.1"
-db_user = "user"
-db_password = "password"
-db_name = "db"
+# db_endpoint = "127.0.0.1"
+# db_endpoint="db"
+# db_user = "user"
+# db_password = "password"
+# db_name = "db"
 
 app = Flask(__name__)
 CORS(app)
@@ -94,3 +94,7 @@ def article_delete(id):
     db.session.commit()
 
     return artcile_schema.jsonify(article)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=5000)
