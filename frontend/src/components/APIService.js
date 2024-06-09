@@ -1,6 +1,8 @@
+import config  from '../config';
 export default class APIService {
     static UpdateArticle(id, body){
-        return  fetch(`http://127.0.0.1:5000/update/${id}/`, {
+      // `http://127.0.0.1:5000/update/${id}/`
+        return  fetch(`${config.backendUrl}/update/${id}/`, {
             
             'method': 'PUT',
              headers: {
@@ -13,7 +15,8 @@ export default class APIService {
     }
 
     static InsertArticle(body){
-      return  fetch(`http://127.0.0.1:5000/add/`, {
+      // `http://127.0.0.1:5000/add/`
+      return  fetch(`${config.backendUrl}/add/`, {
           
           'method': 'POST',
            headers: {
@@ -25,7 +28,8 @@ export default class APIService {
     
   }
   static DeleteArticle(id){
-    return  fetch(`http://127.0.0.1:5000/delete/${id}/`, {
+    // http://127.0.0.1:5000/delete/${id}/
+    return  fetch(`${config.backendUrl}/delete/${id}/`, {
         
         'method': 'DELETE',
          headers: {

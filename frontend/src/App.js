@@ -2,6 +2,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import ArticleList from './components/ArticleList';
 import Form from './components/Form';
+import config from './config';
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
 
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/get', {
+    // http://127.0.0.1:5000/get
+    fetch(`${config.backendUrl}/get`, {
       'method': 'GET',
       headers: {
         'Content-Type': 'application/json'

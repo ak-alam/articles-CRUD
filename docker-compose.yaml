@@ -8,6 +8,8 @@ services:
     restart: always
     ports:
       - 3000:3000
+    environment:
+      - REACT_APP_BACKEND_URL=http://127.0.0.1:5000
 
   article-api:
     container_name: article_api
@@ -18,11 +20,15 @@ services:
     ports:
       - 5000:5000
     environment:
-      - db_endpoint=127.0.0.1
-      - db_endpoint=db
-      - db_user=user
-      - db_password=password
-      - db_name=db
+      - MYSQL_DB_HOST=127.0.0.1
+      - MYSQL_DB_USER=db
+      - MYSQL_DB_PASSWORD=password
+      - MYSQL_DB_NAME=password
+      # - db_endpoint=127.0.0.1
+      # - db_endpoint=db
+      # - db_user=user
+      # - db_password=password
+      # - db_name=db
 
     depends_on:
       - db

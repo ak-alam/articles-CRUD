@@ -6,10 +6,10 @@ import datetime
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 
-db_endpoint = os.environ['db_endpoint']
-db_user = os.environ['db_user']
-db_password = os.environ['db_password']
-db_name = os.environ['db_name']
+db_endpoint = os.environ['MYSQL_DB_HOST']
+db_user = os.environ['MYSQL_DB_USER']
+db_password = os.environ['MYSQL_DB_PASSWORD']
+db_name = os.environ['MYSQL_DB_NAME']
 
 # db_endpoint = "127.0.0.1"
 # db_endpoint="db"
