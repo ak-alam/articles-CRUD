@@ -69,6 +69,31 @@ spec:
   selector:
     app: backend-api
   ports:
-  - port: 5000
+  - port: 80
     protocol: TCP
     targetPort: 5000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: cert-isssuer
+  name: backend-api-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api.akbaralam.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: backend-api-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts: 
+    - api.akbaralam.me
+    secretName: api-cert-secret

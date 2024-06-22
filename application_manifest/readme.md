@@ -16,3 +16,4 @@ service endpoint
 backendapi.default.svc.cluster.local
 <servicename>.<namespace>.svc.cluster.local
 backend-api-svc.default.svc.cluster.local
+frontend-api-svc.default.s

@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   name: frontend-api-secret
 data:
-  REACT_APP_BACKEND_URL: YmFja2VuZC1hcGktc3ZjLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWw=
+  REACT_APP_BACKEND_URL: aHR0cHM6Ly9hcGkuYWtiYXJhbGFtLm1lCg==
 
 --- 
 apiVersion: apps/v1
@@ -25,9 +25,9 @@ spec:
     spec:
       containers:
       - name: frontend-api
-        image: script0kid/article-frontend:v0
+        image: script0kid/article-frontend:v1
         ports:
-          - containerPort: 30000
+          - containerPort: 3000
         env:
           - name: REACT_APP_BACKEND_URL
             valueFrom:
