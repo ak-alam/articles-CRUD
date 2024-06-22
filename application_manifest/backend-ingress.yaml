@@ -1,0 +1,83 @@
+
+##########################################
+# Cert Manager Configs
+##########################################
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  # name: monitor-app-cert-isssuer
+  name: 3-tier-app-cert-isssuer
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: alam.akbar1989@gmail.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      # name: monitor-app-cert-isssuer
+      name: 3-tier-app-cert-isssuer
+    # Enable the HTTP-01 challenge provider
+    solvers:
+    - http01:
+        ingress:
+          class: nginx       
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  # name: monitor-app-cert
+  name: 3-tier-app-cert
+spec:
+  # secretName: monitor-app-cert-secret
+  secretName: 3-tier-app-cert-secret
+  issuerRef:
+    name: 3-tier-app-cert-isssuer
+    kind: ClusterIssuer
+  commonName: akbaralam.me
+  dnsNames:
+  - akbaralam.me 
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  # annotations:
+  #   cert-manager.io/cluster-issuer: kubeissuer
+  name: backend-api-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: akbaralam.me
+    http:
+      paths:
+      - backend:
+          service:
+            name: backend-api-svcsvc
+            port:
+              number: 5000
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts: 
+    - akbaralam.me
+    secretName: 3-tier-app-cert-secret
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: backend-api-ingress
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - host: akbaralam.me
+#       http:
+#           paths:
+#             - path: /
+#               pathType: Prefix
+#               backend:
+#                 service:
+#                   name: backend-api-svc
+#                   port:
+#                     number: 5000
