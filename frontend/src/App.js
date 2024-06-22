@@ -2,7 +2,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import ArticleList from './components/ArticleList';
 import Form from './components/Form';
-import config from './config';
+// import config from './config';
 
 function App() {
 
@@ -13,7 +13,9 @@ function App() {
 
   useEffect(() => {
     // http://127.0.0.1:5000/get
-    fetch(`${config.backendUrl}/get`, {
+    // fetch(`${config.backendUrl}/get`, {
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/get`, {
       'method': 'GET',
       headers: {
         'Content-Type': 'application/json'
